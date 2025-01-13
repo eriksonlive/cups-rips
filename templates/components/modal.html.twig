@@ -1,0 +1,304 @@
+<div x-data="{ modelOpen: false}" @open-modal.window="modelOpen=true">
+	<button @click="modelOpen=!modelOpen" class="flex items-center justify-center px-3 py-2 mr-4 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-500 rounded dark:bg-green-600 dark:hover:bg-green-700 dark:focus:bg-green-700 hover:bg-green-600 focus:outline-none focus:bg-green-500 focus:ring focus:ring-green-300 focus:ring-opacity-50">
+		<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewbox="0 0 20 20" fill="currentColor">
+			<path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"/>
+		</svg>
+
+		<span>Crear</span>
+	</button>
+
+	<div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+		<div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
+			<div x-cloak @click="modelOpen = false" x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"></div>
+
+			<div x-cloak x-show="modelOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="inline-block w-full max-w-xl p-8 my-20 text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
+				<div class="flex items-center justify-between space-x-4">
+					<h1 class="text-xl font-medium text-gray-800 ">Nuevo CUPS-RIPS</h1>
+
+					<button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
+						<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+						</svg>
+					</button>
+				</div>
+
+				<p class="mt-2 text-sm text-gray-500 ">
+					Add your teammate to your team and start work to get things done
+				</p>
+
+				<form method="post" action="{{ path('app_example_create') }}">
+
+					<div class="mt-5 grid grid-cols-2 gap-4" x-data="formHandler()" data-groups="{{ groupedData|json_encode|e('html_attr') }}">
+						<div class="col-span-2">
+							<label for="cups" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Cups</label>
+							<select
+								id="cups" name="cups" data-placeholder="Buscar descripción..." data-url="{{ path('cups') }}" class="codigo-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+								<!-- Reemplaza con tu URL de búsqueda -->
+								<option value="" disabled selected>Seleccione una opción</option>
+							</select>
+							{% if errors['cups'] is defined %}
+								<div class="text-red-500 mt-[-20px]">
+									{% for error in errors['cups'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="tipo_cita" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Tipo cita</label>
+							<select id="tipo_cita" name="tipo_cita" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción...">
+								<option value="" disabled selected>Seleccione una opción</option>
+								<option value="1">Consulta</option>
+								<option value="2">Procedimiento</option>
+							</select>
+							{% if errors['tipo_cita'] is defined %}
+								<div class="error text-red-500">
+									{% for error in errors['tipo_cita'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div class="mt-6 space-y-5">
+							<div class="flex items-center space-x-3 cursor-pointer" x-data="{ show: true }" @click="show =!show">
+								<input type="hidden" name="informe_oportunidad" value="false"/>
+								<div class="relative w-10 h-5 transition duration-200 ease-linear rounded-full" :class="[show ? 'bg-indigo-500' : 'bg-gray-300']">
+									<label for="show" @click="show =!show" class="absolute left-0 w-5 h-5 mb-2 transition duration-100 ease-linear transform bg-white border-2 rounded-full cursor-pointer" :class="[show ? 'translate-x-full border-indigo-500' : 'translate-x-0 border-gray-300']"></label>
+									<input type="checkbox" name="informe_oportunidad" :checked="show" :value="show ? 'true' : 'false'" class="hidden w-full h-full rounded-full appearance-none active:outline-none focus:outline-none"/>
+								</div>
+
+								<p class="text-gray-500">Informe Oportunidad</p>
+							</div>
+						</div>
+
+						<div>
+							<!-- Primer select: Grupos -->
+							<label for="grupo" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Grupo Servicio</label>
+							<select id="grupo" name="grupo" x-model="selectedGroup" @change="updateServices()" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+								<option value="" disabled selected>Seleccione un grupo</option>
+								<template x-for="(group, groupCode) in groups" :key="groupCode">
+									<option :value="groupCode" x-text="group.nombre"></option>
+								</template>
+							</select>
+							{% if errors['grupo'] is defined %}
+								<div class="error text-red-500">
+									{% for error in errors['grupo'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="servicio" class="block text-sm text-gray-700 capitalize dark:text-gray-200">Codigo Servicio</label>
+							<select id="servicio" name="servicio" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" :disabled="!services.length">
+								<option value="" disabled selected x-show="!services.length">Seleccione un servicio</option>
+								<template x-for="service in services" :key="service.codigo">
+									<option :value="service.codigo" x-text="service.nombre"></option>
+								</template>
+							</select>
+							{% if errors['servicio'] is defined %}
+								<div class="error text-red-500">
+									{% for error in errors['servicio'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="diag" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Diagnostico por defecto</label>
+							<select
+								id="diag" name="diag" class="codigo-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción..." data-url="{{ path('diagnostico_suggestions') }}">
+								<!-- Reemplaza con tu URL de búsqueda -->
+								<option value="" disabled selected>Seleccione una opción</option>
+							</select>
+							{% if errors['diag'] is defined %}
+								<div class="error text-red-500 mt-[-20px]">
+									{% for error in errors['diag'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="tipo_diag" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Tipo Diagnóstico</label>
+							<select id="tipo_diag" name="tipo_diag" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción...">
+								<option value="" disabled selected>Seleccione una opción</option>
+								<option value="01">Impresión diagnóstica</option>
+								<option value="02">Confirmado Nuevo</option>
+								<option value="03">Confirmado Repetido</option>
+							</select>
+							{% if errors['tipo_diag'] is defined %}
+								<div class="error text-red-500">
+									{% for error in errors['tipo_diag'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="causa_externa" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Causa Externa</label>
+							<select
+								id="causa_externa" name="causa_externa" class="choices-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción..." data-url="{{ path('causa_externa') }}">
+								<!-- Reemplaza con tu URL de búsqueda -->
+								<option value="" disabled selected>Seleccione una opción</option>
+							</select>
+							{% if errors['causa_externa'] is defined %}
+								<div class="error text-red-500 mt-[-20px]">
+									{% for error in errors['causa_externa'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div>
+							<label for="finalidad" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Finalidad</label>
+							<select
+								id="finalidad" name="finalidad" class="choices-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción..." data-url="{{ path('finalidad_data') }}">
+								<!-- Reemplaza con tu URL de búsqueda -->
+								<option value="" disabled selected>Seleccione una opción</option>
+							</select>
+							{% if errors['finalidad'] is defined %}
+								<div class="error text-red-500 mt-[-20px]">
+									{% for error in errors['finalidad'] %}
+										<p>{{ error }}</p>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<div class="flex justify-end mt-6 col-span-2">
+							<button type="submit" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-green-500 rounded dark:bg-green-600 dark:hover:bg-green-700 dark:focus:bg-green-700 hover:bg-green-600 focus:outline-none focus:bg-green-500 focus:ring focus:ring-green-300 focus:ring-opacity-50">
+								Crear
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+ <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('formHandler', () => ({
+            // Select anidado
+            groups: JSON.parse(document.querySelector('[data-groups]').getAttribute('data-groups')),
+            selectedGroup: '',
+            services: [],
+            // Datos para cupsData
+            codigoCups: '',
+            nombreCups: '',
+            cupsList: [], // Simulación de datos de CUPS
+            updateServices() {
+                this.services = this.selectedGroup ? this.groups[this.selectedGroup].items : [];
+            },
+        }));
+    });
+
+	// document.addEventListener('DOMContentLoaded', () => {
+	// 	function initializeChoicesAutocomplete(selector) {
+	// 		const elements = document.querySelectorAll(selector);
+
+	// 		elements.forEach((selectElement) => {
+	// 			if (!selectElement) return;
+
+	// 			const url = selectElement.dataset.url; // URL del backend
+	// 			const placeholder = selectElement.dataset.placeholder || 'Buscar...';
+
+	// 			// Inicializa Choices.js
+	// 			let choicesInstance = new Choices(selectElement, {
+	// 				searchEnabled: true,
+	// 				searchPlaceholderValue: placeholder,
+	// 				shouldSort: false,
+	// 				removeItemButton: true, // Si es necesario permitir remover elementos
+	// 			});
+
+	// 			selectElement._choicesInstance = choicesInstance; // Guardar la instancia en el elemento
+
+	// 			// Función para actualizar las opciones basándose en el valor predeterminado
+	// 			const updateChoicesWithDefault = (defaultValue) => {
+	// 				if (!defaultValue || !url) return;
+
+	// 				fetch(`${url}?q=${defaultValue}`)
+	// 					.then((response) => response.json())
+	// 					.then((data) => {
+	// 						choicesInstance.clearChoices();
+	// 						choicesInstance.setChoices(
+	// 							data.map((item) => ({
+	// 								value: item.id,
+	// 								label: item.text,
+	// 							})),
+	// 							'value',
+	// 							'label',
+	// 							true
+	// 						);
+
+	// 						// Selecciona automáticamente el valor predeterminado si coincide
+	// 						if (data.some((item) => item.id === defaultValue)) {
+	// 							choicesInstance.setChoiceByValue(defaultValue);
+	// 						}
+	// 					})
+	// 					.catch((error) => console.error('Error al cargar opciones iniciales:', error));
+	// 			};
+
+	// 			// Observar cambios en el atributo data-default
+	// 			const observer = new MutationObserver((mutations) => {
+	// 				mutations.forEach((mutation) => {
+	// 					if (mutation.attributeName === 'data-default') {
+	// 						const newDefaultValue = selectElement.dataset.default;
+	// 						updateChoicesWithDefault(newDefaultValue); // Actualizar las opciones
+	// 					}
+	// 				});
+	// 			});
+
+	// 			observer.observe(selectElement, { attributes: true }); // Observar atributos del elemento
+
+	// 			// Inicializar con el valor actual de data-default si existe
+	// 			const defaultValue = selectElement.dataset.default;
+	// 			if (defaultValue) {
+	// 				updateChoicesWithDefault(defaultValue);
+	// 			}
+
+	// 			// Gestionar la búsqueda dinámica en el evento input
+	// 			selectElement.addEventListener('input', async (event) => {
+	// 				const query = event.target.value; // Captura el valor de entrada
+	// 				if (query.length < 3) {
+	// 					choicesInstance.clearChoices();
+	// 					return;
+	// 				}
+
+	// 				try {
+	// 					const response = await fetch(`${url}?q=${encodeURIComponent(query)}`);
+	// 					const data = await response.json();
+
+	// 					// Limpiar opciones actuales y cargar las nuevas
+	// 					choicesInstance.clearChoices();
+	// 					choicesInstance.setChoices(
+	// 						data.map((item) => ({
+	// 							value: item.id,
+	// 							label: item.text,
+	// 						})),
+	// 						'value',
+	// 						'label',
+	// 						true
+	// 					);
+	// 				} catch (error) {
+	// 					console.error('Error al cargar los datos:', error);
+	// 				}
+	// 			});
+	// 		});
+	// 	}
+
+	// 	// Inicializar Choices.js para selectores específicos
+	// 	initializeChoicesAutocomplete('.choices-autocomplete');
+	// 	initializeChoicesAutocomplete('.codigo-autocomplete');
+	// });
+
+</script>
