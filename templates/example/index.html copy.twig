@@ -1,0 +1,270 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ExampleController!
+{% endblock %}
+
+{% block body %}
+
+	<div>
+		<!-- component -->
+		<div class="-my-2 py-2 overflow-x-auto">
+			<div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12">
+				<h2 class="text-[30px] font-bold mt-6 mb-10">Listado CUPS - RIPS</h2>
+				<form method="get" action="{{ path('index') }}" class="flex flex-row">
+					<div class="inline-flex items-center basis-1/4">
+						<div class="inline-flex items-center mr-3">
+							<label class="font-bold">Cód. Cups</label>
+						</div>
+						<div class="inline-flex border rounded w-8/12 h-12 bg-transparent">
+							<div class="flex flex-wrap items-stretch w-full h-full mb-6 relative">
+								<div class="flex">
+									<span class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
+										<svg width="18" height="18" class="w-4 lg:w-auto" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</span>
+								</div>
+								<input type="text" name="codigo_cups" value="{{ codigoCups }}" class="flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin" placeholder="Search">
+							</div>
+						</div>
+					</div>
+
+					<div class="inline-flex items-center basis-1/3">
+						<div class="inline-flex items-center mx-3 w-40">
+							<label class="font-bold text-wrap">Descripción Cups</label>
+						</div>
+						<div class="inline-flex border rounded w-8/12 h-12 bg-transparent">
+							<div class="flex flex-wrap items-stretch w-full h-full mb-6 relative">
+								<div class="flex">
+									<span class="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-none lg:px-3 py-2 whitespace-no-wrap text-grey-dark text-sm">
+										<svg width="18" height="18" class="w-4 lg:w-auto" viewbox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M8.11086 15.2217C12.0381 15.2217 15.2217 12.0381 15.2217 8.11086C15.2217 4.18364 12.0381 1 8.11086 1C4.18364 1 1 4.18364 1 8.11086C1 12.0381 4.18364 15.2217 8.11086 15.2217Z" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M16.9993 16.9993L13.1328 13.1328" stroke="#455A64" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+									</span>
+								</div>
+								<input type="text" name="descripcion_cups" value="{{ descripcionCups }}" class="flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin" placeholder="Search">
+							</div>
+						</div>
+					</div>
+
+					<div class="inline-flex mx-3 w-1/3">
+						<button type="submit" class="border rounded p-3 w-20 h-fit bg-green-500 text-white shadow-sm">Filtrar</button>
+					</div>
+				</form>
+				<div class="flex flex-row my-4">
+					{% include 'components/modal.html.twig' %}
+					<button onclick="window.location.href='/export';" class="flex items-center justify-center px-3 py-2 mr-4 space-x-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-gray-500 rounded dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-500 focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+						<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M9 7V2.221a2 2 0 0 0-.5.365L4.586 6.5a2 2 0 0 0-.365.5H9Zm2 0V2h7a2 2 0 0 1 2 2v9.293l-2-2a1 1 0 0 0-1.414 1.414l.293.293h-6.586a1 1 0 1 0 0 2h6.586l-.293.293A1 1 0 0 0 18 16.707l2-2V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9h5a2 2 0 0 0 2-2Z" clip-rule="evenodd"/>
+						</svg>
+
+						<span>Exportar</span>
+					</button>
+				</div>
+			</div>
+			<div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+				<table class="min-w-full">
+					<thead>
+						<tr>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left leading-4 text-blue-500 tracking-wider"></th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">ID</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Cód Cups</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Descripción Cups</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Tipo</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Informe Oportunidad</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Diágnostico</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Finalidad</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Causa Externa</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Codigo servicio Rips</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Tipo de diagnostico</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Creado Por</th>
+							<th class="px-3 py-3 border-b-2 border-gray-300 text-left text-xs leading-4 text-blue-500 tracking-wider">Creado En</th>
+							{# <th class="px-3 py-3 border-b-2 border-gray-300"></th> #}
+						</tr>
+					</thead>
+					<tbody class="bg-white">
+						{% for value in paginator %}
+							<tr x-data="{informeoportunidad: false}" id="fila-{{ value.id }}" x-init="informeoportunidad = {{ value.informeOportunidad|default(false)|json_encode() }}">
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500">
+									<div class="flex items-center">
+										<div>
+											<button @click="$dispatch('open-modal-update', {id: {{ value.id|json_encode }}});" class="border rounded p-1 m-1 bg-orange-500 text-white border-orange-500">
+												<svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewbox="0 0 24 24">
+													<path fill="currentColor" d="M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z"/>
+													<path fill="currentColor" d="M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z"/>
+												</svg>
+											</button>
+											<button @click="eliminarDato({{ value.id }})" class="border rounded p-1 m-1 bg-red-500 text-white border-red-500">
+												<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="24" height="24" viewbox="0 0 24 24">
+													<path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
+												</svg>
+											</button>
+										</div>
+									</div>
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500">
+									<div class="flex items-center">
+										<div>
+											<div class="text-xs leading-5 text-gray-800">{{ value.id }}</div>
+										</div>
+									</div>
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500">
+									<div class="text-xs leading-5 text-blue-900">{{ value.cups.codigoCups }}</div>
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-xs leading-5">{{ value.cups.descripcionCups }}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-xs leading-5">{{ value.tipoServicio == 1 ? 'Consulta': 'Procedimiento' }}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-xs leading-5">
+									<span class="relative inline-block px-3 py-1 font-semibold leading-tight">
+										<span aria-hidden class="absolute inset-0 opacity-50 rounded-full" :class="{'text-green-900 bg-green-200': informeoportunidad, 'text-red-900 bg-red-200': !informeoportunidad}"></span>
+										<span>{{ value.informeOportunidad ? 'true': 'false' }}</span>
+									</span>
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">
+									{{ value.diagnosticoDefaults.cie10  }}:
+									{{ value.diagnosticoDefaults.nombre }}
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">{{ value.finalidad.codigo }}:
+									{{ value.finalidad.nombre}}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">{{ value.causaExterna.codigo }}:
+									{{ value.causaExterna.nombre}}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">{{ value.servicioRipsCode.codigo }}:
+									{{ value.servicioRipsCode.nombre}}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">
+									{% if value.tipoDiagnostico == '01' %}
+										Impresión diagnóstica
+									{% elseif value.tipoDiagnostico == '02' %}
+										Confirmado nuevo
+									{% elseif value.tipoDiagnostico == '03' %}
+										Confirmado repetido
+									{% endif %}
+								</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">{{ value.createdBy }}</td>
+								<td class="px-3 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-xs leading-5">{{ value.createdAt|date('d-m-Y H:i') }}</td>
+								{# <td class="px-3 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-xs leading-5">
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																	<button class="px-5 py-2 border-blue-500 border text-blue-500 rounded transition duration-300 hover:bg-blue-700 hover:text-white focus:outline-none">View Details</button>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																</td> #}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+					<div>
+						<p class="text-sm leading-5 text-blue-700">
+							Showing
+							<span class="font-medium">
+								{{ (offset + 1) }}
+								<!-- Mostramos el primer elemento en la página actual -->
+							</span>
+							to
+							<span class="font-medium">
+								{% if (offset + itemsPerPage) > totalCount %}
+									{{ totalCount }}
+								{% else %}
+									{{ (offset + itemsPerPage) }}
+								{% endif %}
+							</span>
+							of
+							<span class="font-medium">{{ totalCount }}</span>
+							results
+						</p>
+					</div>
+					<div>
+						<nav class="relative z-0 inline-flex shadow-sm">
+
+							{% if page > 1 %}
+								<div>
+									<a href="{{ path('index', { 'page': page - 1 }) }}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous" v-on:click.prevent="changePage(pagination.current_page - 1)">
+										<svg class="h-5 w-5" viewbox="0 0 20 20" fill="currentColor">
+											<path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+										</svg>
+									</a>
+								</div>
+							{% endif %}
+
+							<div>
+								{% for page in 0..totalPages - 1 %}
+									<a href="{{ path('index', { 'page': page + 1 }) }}" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-700 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary">
+										{{ page + 1 }}
+									</a>
+								{% endfor %}
+							</div>
+
+							{% if page < totalPages %}
+								<div v-if="pagination.current_page < pagination.last_page">
+									<a href="{{ path('index', { 'page': page + 1 }) }}" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
+										<svg class="h-5 w-5" viewbox="0 0 20 20" fill="currentColor">
+											<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+										</svg>
+									</a>
+								</div>
+							{% endif %}
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success text-green-700">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	{% include 'components/modalUpdate.html.twig' %}
+	 <script>
+																																																															
+		function eliminarDato(id) {
+			if (confirm('¿Estás seguro de que deseas eliminar este dato?')) {
+				// Hacer la solicitud AJAX al controlador Symfony
+				fetch('/delete/' + id, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-Requested-With': 'XMLHttpRequest'
+					}
+				})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						location.reload();
+					} else {
+						alert('Hubo un error al eliminar el dato.');
+					}
+				});
+			}
+		}
+	
+		function abrirModal(id) {
+			// Abre el modal
+	
+			// Hacer la solicitud AJAX para obtener los datos del formulario
+			fetch('/edit/' + id)  // Cambia esta ruta a la que devuelve los datos que quieres cargar
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						// Rellenar los campos del formulario con los datos obtenidos
+						var cupsElement = document.getElementById('cups');
+	
+						// Asignar el valor del atributo data-value
+						cupsElement.dataset.default = data.cups;
+						document.getElementById('cups').setAttribute('data-default', data.cups);
+	
+						// Despachar un evento personalizado con los datos obtenidos
+						const event = new CustomEvent('modal-data-loaded', {
+							detail: {
+								cups: data.cups
+							}
+						});
+						document.dispatchEvent(event);
+					} else {
+						alert('Hubo un error al obtener los datos.');
+					}
+			});
+		}
+	
+		</script>
+{% endblock %}
