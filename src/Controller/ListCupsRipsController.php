@@ -50,7 +50,7 @@ class ListCupsRipsController extends AbstractController
         ]);
     }
 
-    #[Route('/api/list-diagnostic', name: 'get_list_diagnostic', methods: ['GET'])]
+    #[Route('/list-diagnostic', name: 'get_list_diagnostic', methods: ['GET'])]
     public function diagnosticoSuggestions(Request $request, AsCie10Repository $cie10Repository): JsonResponse
     {
         $search_parameter = $request->query->get('q', '');
@@ -69,7 +69,7 @@ class ListCupsRipsController extends AbstractController
         return $this->json($result_suggestions);
     }
 
-    #[Route('/api/list-external-cause', name: 'get_list_external_cause', methods: ['GET'])]
+    #[Route('/list-external-cause', name: 'get_list_external_cause', methods: ['GET'])]
     public function causaExterna(Request $request, RipsTablaReferenciaCausaExternaV2Repository $causaRepository): JsonResponse
     {
         $search_parameter = $request->query->get('q', '');
@@ -86,7 +86,7 @@ class ListCupsRipsController extends AbstractController
         return $this->json($result_cause);
     }
 
-    #[Route('/api/list-finality', name: 'get_list_finality', methods: ['GET'])]
+    #[Route('/list-finality', name: 'get_list_finality', methods: ['GET'])]
     public function finalidadData(Request $request, RipsTablaReferenciaFinalidadConsultaV2Repository $finalidadRepository): JsonResponse
     {
         $search_parameter = $request->query->get('q', '');
@@ -103,7 +103,7 @@ class ListCupsRipsController extends AbstractController
         return $this->json($result_finality);
     }
 
-    #[Route('/api/list-cups', name: 'get_list_as_cups', methods: ['GET'])]
+    #[Route('/list-cups', name: 'get_list_as_cups', methods: ['GET'])]
     public function cupsData(Request $request, AsCupsRepository $asCups): JsonResponse
     {
         $search_parameter = $request->query->get('q', '');

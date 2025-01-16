@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RoutesController extends AbstractController
 {
-    #[Route('/api/get-consults', name: 'get_as_consults', methods: ['GET'])]
+    #[Route('/get-consults', name: 'get_as_consults', methods: ['GET'])]
     public function fetchData(
         AsConsultasProcedimientosRepository $procedimientos,
         Request $request,
@@ -80,7 +80,7 @@ class RoutesController extends AbstractController
         ]);
     }
 
-    #[Route('/api/get-consult/{id}', name: 'get_as_consult_by_id', methods: ['GET'])]
+    #[Route('/get-consult/{id}', name: 'get_as_consult_by_id', methods: ['GET'])]
     public function edit(int $id, AsConsultasProcedimientosRepository $consult): Response
     {
         // Buscar el registro por ID
@@ -106,7 +106,7 @@ class RoutesController extends AbstractController
         ]);
     }
 
-    #[Route('/api/create-consult', name: 'create_as_consult', methods: ['POST'])]
+    #[Route('/create-consult', name: 'create_as_consult', methods: ['POST'])]
     public function createAsConsultasProcedimientos(
         Request $request,
         ValidationServices $validationService,
@@ -134,7 +134,7 @@ class RoutesController extends AbstractController
         // Asignar los campos no relacionados (campos simples)
         $data['informe_oportunidad'] = $data['informe_oportunidad'] == 'true' ? true : false;
         $data['created_by'] = "Admin";
-        
+
         $simpleFields = [
             'tipo_servicio' => 'setTipoServicio',
             'informe_oportunidad' => 'setInformeOportunidad',
@@ -155,7 +155,7 @@ class RoutesController extends AbstractController
         return $this->json(['message' => 'Consulta creada exitosamente.']);
     }
 
-    #[Route('/api/update-consult/{id}', name: 'update_as_consult', methods: ['PATCH', 'POST'])]
+    #[Route('/update-consult/{id}', name: 'update_as_consult', methods: ['PATCH', 'POST'])]
     public function updateAsConsultasProcedimientos(
         int $id,
         Request $request,
@@ -210,7 +210,7 @@ class RoutesController extends AbstractController
         return $this->json(['message' => 'Consulta actualizada exitosamente.']);
     }
 
-    #[Route('/api/delete-consult/{id}', name: 'delete_as_consult', methods: ['DELETE'])]
+    #[Route('/delete-consult/{id}', name: 'delete_as_consult', methods: ['DELETE'])]
     public function deleteAsConsultasProcedimientos(int $id, AsConsultasProcedimientosRepository $consultas, EntityManagerInterface $em): Response
     {
         $consult = $consultas->find($id);
