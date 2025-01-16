@@ -45,9 +45,9 @@ class RoutesController extends AbstractController
 
             $type_diag = '';
 
-            if ($item->getTipoDiagnostico() === '1') {
+            if ($item->getTipoDiagnostico() === '01') {
                 $type_diag = 'Impresión Diágnostica';
-            } else if ($item->getTipoDiagnostico() === '2') {
+            } else if ($item->getTipoDiagnostico() === '02') {
                 $type_diag = 'Confirmado Nuevo';
             } else {
                 $type_diag = 'Confirmado Repetido';
@@ -105,7 +105,7 @@ class RoutesController extends AbstractController
             'informe' => $result_consult->isInformeOportunidad()
         ]);
     }
-    
+
     #[Route('/api/create-consult', name: 'create_as_consult', methods: ['POST'])]
     public function createAsConsultasProcedimientos(
         Request $request,
@@ -133,11 +133,14 @@ class RoutesController extends AbstractController
 
         // Asignar los campos no relacionados (campos simples)
         $data['informe_oportunidad'] = $data['informe_oportunidad'] == 'true' ? true : false;
+        $data['created_by'] = "Admin";
+        
         $simpleFields = [
             'tipo_servicio' => 'setTipoServicio',
             'informe_oportunidad' => 'setInformeOportunidad',
             'tipo_cita' => 'setTipoCita',
             'tipo_diagnostico' => 'setTipoDiagnostico',
+            'created_by' => 'setCreatedBy'
         ];
 
         $result = $validationService->validateAndAssignRelations($asConsultas, $data, $relations, $simpleFields);

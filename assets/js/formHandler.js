@@ -105,12 +105,13 @@ document.addEventListener('alpine:init', () => {
           this.errors = {}; // Limpia los errores si no hay ninguno
           this.cleanState();
           this.$dispatch('modal-close');
-          this.$dispatch('alert');
+          this.$dispatch('alert', {'success': 'Creado correctamente'});
           this.$dispatch('reload');
         }
       } catch (error) {
         console.error('Error al enviar el formulario:', error);
-        alert('Error al enviar el formulario.');
+        // alert('Error al enviar el formulario.');
+        this.$dispatch('alert', {'error': 'Error al enviar el formulario.'});
       }
     },
     async updateData() {
@@ -143,12 +144,13 @@ document.addEventListener('alpine:init', () => {
           // alert('Datos actualizados con éxito.');
           // this.cleanState();
           this.$dispatch('modal-close');
-          this.$dispatch('alert');
+          this.$dispatch('alert', {'success': 'Actualizado correctamente'});
           this.$dispatch('reload');
         }
       } catch (error) {
         console.error('Error al actualizar los datos:', error);
-        alert('Error al actualizar los datos. Por favor, inténtelo de nuevo.');
+        this.$dispatch('alert', {'error': 'Error al actualizar los datos. Por favor, inténtelo de nuevo.'});
+        // alert('Error al actualizar los datos. Por favor, inténtelo de nuevo.');
       }
     },
   }));

@@ -67,10 +67,11 @@ document.addEventListener('alpine:init', () => {
                 .then( response => response.json())
                 .then(data => {
                     if (data.success) {
-                        this.$dispatch('alert');
+                        this.$dispatch('alert', {'success': 'Eliminado Correctamente'});
                         this.fetchPage(this.page);
                     } else {
-                        alert('Hubo un error al eliminar el dato.');
+                        // alert('Hubo un error al eliminar el dato.');
+                        this.$dispatch('alert', {'success': 'Hubo un error al eliminar el dato.'});
                     }
                 });
             }
