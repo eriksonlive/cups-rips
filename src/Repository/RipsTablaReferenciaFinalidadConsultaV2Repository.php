@@ -21,11 +21,11 @@ class RipsTablaReferenciaFinalidadConsultaV2Repository extends ServiceEntityRepo
         parent::__construct($registry, RipsTablaReferenciaFinalidadConsultaV2::class);
     }
 
-    public function findByQuery(string $query): array
+    public function findByCodeFinally(string $query): array
     {
         return $this->createQueryBuilder('value')
             ->where('LOWER(value.codigo) LIKE :query OR LOWER(value.nombre) LIKE :query')
-            ->setParameter('query', '%' . $query . '%')
+            ->setParameter('query', '%' . strtolower($query) . '%')
             ->setMaxResults(10) // Limita la cantidad de resultados para autocompletado
             ->getQuery()
             ->getResult();

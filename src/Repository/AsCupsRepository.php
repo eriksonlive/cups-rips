@@ -26,11 +26,22 @@ class AsCupsRepository extends ServiceEntityRepository
         return $this->findBy([], ['codigo_cups' => 'ASC']);
     }
 
-    public function findByQuery(string $query): array
+    public function findByCodeCups(?string $query = null, ?string $id = null): array
     {
-        return $this->createQueryBuilder('value')
-            ->where('LOWER(value.descripcion_cups) LIKE :query OR value.codigo_cups LIKE :query')
-            ->setParameter('query', '%' . $query . '%')
+        $qb = $this->createQueryBuilder('value');
+
+        // Agregar condición para `id` solo si no es nulo o vacío
+        if (!empty($id)) {
+            $qb->where('value.id = :id') // Nota: Usa un solo "=" para comparar
+                ->setParameter('id', $id);
+        }
+
+        if(!empty($query)){
+            $qb->where('LOWER(value.descripcion_cups) LIKE :query OR value.codigo_cups LIKE :query')
+            ->setParameter('query', '%' . strtolower($query) . '%');
+        }
+
+        return $qb
             ->setMaxResults(10) // Limita la cantidad de resultados para autocompletado
             ->orderBy('value.codigo_cups', 'ASC')
             ->getQuery()

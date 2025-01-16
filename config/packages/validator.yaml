@@ -10,4 +10,5 @@ framework:
 when@test:
     framework:
         validation:
+            enable: true
             not_compromised_password: false

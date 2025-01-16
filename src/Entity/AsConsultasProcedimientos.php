@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AsConsultasProcedimientosRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AsConsultasProcedimientosRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -14,37 +15,39 @@ class AsConsultasProcedimientos
     #[ORM\Column(type: "integer")]
     private ?int $id = null;
 
-    // #[Assert\NotBlank]
+    #[Assert\NotBlank(["message" => "El campo CUPS no puede estar vacío."])]
     #[ORM\ManyToOne(targetEntity: AsCups::class, fetch: "EAGER", inversedBy: 'consultasProcedimientos')]
     #[ORM\JoinColumn(name: "cups", referencedColumnName: "id", nullable: false, onDelete: "CASCADE")]
     private ?AsCups $cups = null;
 
-
+    #[Assert\NotBlank(["message" => "El campo Tipo Servicio no puede estar vacío."])]
     #[ORM\Column(length: 250, nullable: true)]
     private ?string $tipo_servicio = null;
 
+    // #[Assert\NotBlank]
     #[ORM\Column(nullable: true)]
     private ?bool $informe_oportunidad = null;
 
+    #[Assert\NotBlank(["message" => "El campo Tipo Cita no puede estar vacío."])]
     #[ORM\Column(nullable: true)]
     private ?int $tipo_cita = null;
 
-    // #[Assert\NotBlank]
+    #[Assert\NotBlank(["message" => "El campo Diagnostico Defaults no puede estar vacío."])]
     #[ORM\ManyToOne(targetEntity: AsCie10::class, fetch: "EAGER", inversedBy: 'consultasProcedimientos')]
     #[ORM\JoinColumn(name: "diagnostico_defaults", referencedColumnName: "id", nullable: false, onDelete: "CASCADE")]
     private ?AsCie10 $diagnostico_defaults = null;
 
-    // #[Assert\NotBlank]
+    #[Assert\NotBlank(["message" => "El campo Finalidad no puede estar vacío."])]
     #[ORM\ManyToOne(targetEntity: RipsTablaReferenciaFinalidadConsultaV2::class, fetch: 'EAGER', inversedBy: 'consultasProcedimientos')]
     #[ORM\JoinColumn(name: 'finalidad', referencedColumnName: 'codigo', nullable: true)]
     private ?RipsTablaReferenciaFinalidadConsultaV2 $finalidad = null;
 
-    // #[Assert\NotBlank]
+    #[Assert\NotBlank(["message" => "El campo Causa Externa no puede estar vacío."])]
     #[ORM\ManyToOne(targetEntity: RipsTablaReferenciaCausaExternaV2::class, fetch: 'EAGER', inversedBy: 'consultasProcedimientos')]
     #[ORM\JoinColumn(name: 'causa_externa', referencedColumnName: 'codigo', nullable: true)]
     private ?RipsTablaReferenciaCausaExternaV2 $causa_externa = null;
 
-    // #[Assert\NotBlank]
+    #[Assert\NotBlank(["message" => "El campo Codigo Servicio no puede estar vacío."])]
     #[ORM\ManyToOne(targetEntity: RipsTablaReferenciaServicio::class, fetch: "EAGER", inversedBy: 'consultasProcedimientos')]
     #[ORM\JoinColumn(name: "servicio_rips_code", referencedColumnName: "codigo", nullable: false, onDelete: "CASCADE")]
     private ?RipsTablaReferenciaServicio $servicio_rips_code = null;
@@ -55,8 +58,21 @@ class AsConsultasProcedimientos
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[Assert\NotBlank(["message" => "El campo Tipo Diágnostico no puede estar vacío."])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tipo_diagnostico = null;
+
+    public function hydrate(array $data): self
+    {
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

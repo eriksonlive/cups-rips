@@ -21,12 +21,23 @@ class AsCie10Repository extends ServiceEntityRepository
         parent::__construct($registry, AsCie10::class);
     }
 
-    public function findByQuery(string $query): array
+    public function findByQueryOrId(?string $query = null, ?string $id = null): array
     {
-        return $this->createQueryBuilder('value')
-            ->where('LOWER(value.cie_10) LIKE :query OR LOWER(value.nombre) LIKE :query')
-            ->setParameter('query', '%' . strtolower($query) . '%')
+        $qb = $this->createQueryBuilder('value');
+
+        if (!empty($id)) {
+            $qb->where('value.id = :id')
+                ->setParameter('id', $id);
+        }
+
+        if (!empty($query)) {
+            $qb->where('LOWER(value.cie_10) LIKE :query OR LOWER(value.nombre) LIKE :query')
+                ->setParameter('query', '%' . strtolower($query) . '%');
+        }
+
+        return $qb
             ->setMaxResults(10) // Limita la cantidad de resultados para autocompletado
+            ->orderBy('value.id', 'ASC')
             ->getQuery()
             ->getResult();
     }

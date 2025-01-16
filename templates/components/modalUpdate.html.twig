@@ -103,7 +103,7 @@
 						<div>
 							<label for="diag" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Diagnostico por defecto</label>
 							<select
-								id="diag" name="diag" x-bind:data-default="diag" class="codigo-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción..." data-url="{{ path('diagnostico_suggestions') }}">
+								id="diag" name="diag" x-bind:data-default="diag" class="codigo-autocomplete block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" data-placeholder="Buscar descripción..." data-url="{{ path('get_list_diagnostic') }}">
 								<!-- Reemplaza con tu URL de búsqueda -->
 								<option value="" disabled selected>Seleccione una opción</option>
 							</select>
