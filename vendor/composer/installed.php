@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-erikson',
         'version' => 'dev-erikson',
-        'reference' => '783c9d77d52ed64ba38e92ac5a720936b44b2203',
+        'reference' => '6ebf3b50de8ff470bac64a42e624a218591daab1',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-erikson',
             'version' => 'dev-erikson',
-            'reference' => '783c9d77d52ed64ba38e92ac5a720936b44b2203',
+            'reference' => '6ebf3b50de8ff470bac64a42e624a218591daab1',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
