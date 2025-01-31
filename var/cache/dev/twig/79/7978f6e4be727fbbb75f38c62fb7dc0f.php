@@ -47,7 +47,7 @@ class __TwigTemplate_421c1c466f576bcb3dd4006a9cf49fa1 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "components/modal-component.html.twig"));
 
         // line 1
-        yield "<div x-data=\"{ modalOpen: false, update: false }\" @modal-open.window=\"modalOpen = true; update = \$event.detail.update;\" @modal-close.window=\"modalOpen = false\">
+        yield "<div x-data=\"{ modalOpen: false, update: false }\" x-init=\"\$watch('modalOpen', (modalState) => { if (!modalState) \$dispatch('modal-close'); });\" @modal-open.window=\"modalOpen = true; update = \$event.detail.update;\" @modal-close.window=\"modalOpen = false;\">
 
 \t<div x-show=\"modalOpen\" class=\"fixed inset-0 z-50 overflow-y-auto\" aria-labelledby=\"modal-title\" role=\"dialog\" aria-modal=\"true\" x-cloak style=\"display:none\">
 \t\t<div class=\"flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0\">
@@ -151,7 +151,7 @@ class __TwigTemplate_421c1c466f576bcb3dd4006a9cf49fa1 extends Template
 
     public function getSourceContext(): Source
     {
-        return new Source("<div x-data=\"{ modalOpen: false, update: false }\" @modal-open.window=\"modalOpen = true; update = \$event.detail.update;\" @modal-close.window=\"modalOpen = false\">
+        return new Source("<div x-data=\"{ modalOpen: false, update: false }\" x-init=\"\$watch('modalOpen', (modalState) => { if (!modalState) \$dispatch('modal-close'); });\" @modal-open.window=\"modalOpen = true; update = \$event.detail.update;\" @modal-close.window=\"modalOpen = false;\">
 
 \t<div x-show=\"modalOpen\" class=\"fixed inset-0 z-50 overflow-y-auto\" aria-labelledby=\"modal-title\" role=\"dialog\" aria-modal=\"true\" x-cloak style=\"display:none\">
 \t\t<div class=\"flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0\">

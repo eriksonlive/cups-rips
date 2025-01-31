@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const updateChoicesWithDefault = (defaultValue) => {
         if (!defaultValue || !url) return;
 
-        query = selector !== '.choices-autocomplete' ? 'id': 'q';
+        query = selector !== '.choices-autocomplete' ? 'id' : 'q';
 
         fetch(`${url}?${query}=${defaultValue}`)
           .then((response) => response.json())
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const query = event.detail.value; // Lo que el usuario escribe
         const url = selectElement.dataset.url;
 
-        if (query.length < 2) {
+        if (query.length < 0) {
           choicesInstance.clearChoices();
           return;
         }

@@ -131,7 +131,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t\t</svg>
 \t\t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t\t<input type=\"text\" name=\"codigo_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin\" placeholder=\"Search\">
+\t\t\t\t\t\t\t\t<input type=\"text\" name=\"codigo_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-md lg:text-md text-gray-500 font-thin\" placeholder=\"Search\">
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -150,7 +150,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t\t</svg>
 \t\t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t\t<input type=\"text\" name=\"descripcion_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin\" placeholder=\"Search\">
+\t\t\t\t\t\t\t\t<input type=\"text\" name=\"descripcion_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-md lg:text-md text-gray-500 font-thin\" placeholder=\"Search\">
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -207,7 +207,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t<td class=\"px-3 py-4 whitespace-no-wrap border-b border-gray-500\">
 \t\t\t\t\t\t\t\t\t\t<div class=\"flex items-center\">
 \t\t\t\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t\t\t\t<button @click=\"\$dispatch('modal-open', {update: true}); \$dispatch('form-update', {id: item.id});\" class=\"border rounded p-1 m-1 bg-orange-500 text-white border-orange-500\">
+\t\t\t\t\t\t\t\t\t\t\t\t<button @click=\"\$dispatch('form-update', {id: item.id});\" class=\"border rounded p-1 m-1 bg-orange-500 text-white border-orange-500\">
 \t\t\t\t\t\t\t\t\t\t\t\t\t<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"currentColor\" viewbox=\"0 0 24 24\">
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t<path fill=\"currentColor\" d=\"M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z\"/>
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t<path fill=\"currentColor\" d=\"M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z\"/>
@@ -267,19 +267,17 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t<nav
 \t\t\t\t\t\t\tclass=\"relative z-0 inline-flex shadow-sm\">
 \t\t\t\t\t\t\t<!-- Botón de página anterior -->
-\t\t\t\t\t\t\t<template x-if=\"currentPage > 1\">
-\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t<button @click=\"changePage(currentPage - 1)\" class=\"relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150\" aria-label=\"Previous\">
-\t\t\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
-\t\t\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z\" clip-rule=\"evenodd\"/>
-\t\t\t\t\t\t\t\t\t\t</svg>
-\t\t\t\t\t\t\t\t\t</button>
-\t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t</template>
+\t\t\t\t\t\t\t<button @click=\"changePage(currentPage - 1)\" :disabled=\"currentPage === 1\" class=\"relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttransition ease-in-out duration-150\" aria-label=\"Previous\">
+\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
+\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z\" clip-rule=\"evenodd\"/>
+\t\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t</button>
 
 \t\t\t\t\t\t\t<!-- Páginas -->
 \t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t<template x-for=\"page in totalPages\" :key=\"page\">
+\t\t\t\t\t\t\t\t<template x-for=\"page in visiblePages\" :key=\"page\">
 \t\t\t\t\t\t\t\t\t<button @click=\"changePage(page)\" :class=\"{'bg-blue-500 text-white': page === currentPage, 'bg-white text-blue-700': page !== currentPage}\" class=\"-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium hover:bg-gray-100 transition ease-in-out duration-150\">
 \t\t\t\t\t\t\t\t\t\t<span x-text=\"page\"></span>
 \t\t\t\t\t\t\t\t\t</button>
@@ -287,15 +285,13 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t</div>
 
 \t\t\t\t\t\t\t<!-- Botón de siguiente página -->
-\t\t\t\t\t\t\t<template x-if=\"currentPage < totalPages\">
-\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t<button @click=\"changePage(currentPage + 1)\" class=\"-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150\" aria-label=\"Next\">
-\t\t\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
-\t\t\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z\" clip-rule=\"evenodd\"/>
-\t\t\t\t\t\t\t\t\t\t</svg>
-\t\t\t\t\t\t\t\t\t</button>
-\t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t</template>
+\t\t\t\t\t\t\t<button @click=\"changePage(currentPage + 1)\" :disabled=\"currentPage === totalPages\" class=\"-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttransition ease-in-out duration-150\" aria-label=\"Next\">
+\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
+\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z\" clip-rule=\"evenodd\"/>
+\t\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t</button>
 \t\t\t\t\t\t</nav>
 \t\t\t\t\t</div>
 \t\t\t\t</div>
@@ -367,7 +363,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t\t</svg>
 \t\t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t\t<input type=\"text\" name=\"codigo_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin\" placeholder=\"Search\">
+\t\t\t\t\t\t\t\t<input type=\"text\" name=\"codigo_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-md lg:text-md text-gray-500 font-thin\" placeholder=\"Search\">
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -386,7 +382,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t\t</svg>
 \t\t\t\t\t\t\t\t\t</span>
 \t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t\t<input type=\"text\" name=\"descripcion_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-xxs lg:text-xs text-gray-500 font-thin\" placeholder=\"Search\">
+\t\t\t\t\t\t\t\t<input type=\"text\" name=\"descripcion_cups\" class=\"flex-shrink flex-grow flex leading-normal tracking-wide w-px flex-1 border border-none border-l-0 rounded rounded-l-none px-2 relative focus:outline-none text-md lg:text-md text-gray-500 font-thin\" placeholder=\"Search\">
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -442,7 +438,7 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t\t\t<td class=\"px-3 py-4 whitespace-no-wrap border-b border-gray-500\">
 \t\t\t\t\t\t\t\t\t\t<div class=\"flex items-center\">
 \t\t\t\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t\t\t\t<button @click=\"\$dispatch('modal-open', {update: true}); \$dispatch('form-update', {id: item.id});\" class=\"border rounded p-1 m-1 bg-orange-500 text-white border-orange-500\">
+\t\t\t\t\t\t\t\t\t\t\t\t<button @click=\"\$dispatch('form-update', {id: item.id});\" class=\"border rounded p-1 m-1 bg-orange-500 text-white border-orange-500\">
 \t\t\t\t\t\t\t\t\t\t\t\t\t<svg class=\"w-6 h-6\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"currentColor\" viewbox=\"0 0 24 24\">
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t<path fill=\"currentColor\" d=\"M11.32 6.176H5c-1.105 0-2 .949-2 2.118v10.588C3 20.052 3.895 21 5 21h11c1.105 0 2-.948 2-2.118v-7.75l-3.914 4.144A2.46 2.46 0 0 1 12.81 16l-2.681.568c-1.75.37-3.292-1.263-2.942-3.115l.536-2.839c.097-.512.335-.983.684-1.352l2.914-3.086Z\"/>
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t<path fill=\"currentColor\" d=\"M19.846 4.318a2.148 2.148 0 0 0-.437-.692 2.014 2.014 0 0 0-.654-.463 1.92 1.92 0 0 0-1.544 0 2.014 2.014 0 0 0-.654.463l-.546.578 2.852 3.02.546-.579a2.14 2.14 0 0 0 .437-.692 2.244 2.244 0 0 0 0-1.635ZM17.45 8.721 14.597 5.7 9.82 10.76a.54.54 0 0 0-.137.27l-.536 2.84c-.07.37.239.696.588.622l2.682-.567a.492.492 0 0 0 .255-.145l4.778-5.06Z\"/>
@@ -502,19 +498,17 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t<nav
 \t\t\t\t\t\t\tclass=\"relative z-0 inline-flex shadow-sm\">
 \t\t\t\t\t\t\t<!-- Botón de página anterior -->
-\t\t\t\t\t\t\t<template x-if=\"currentPage > 1\">
-\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t<button @click=\"changePage(currentPage - 1)\" class=\"relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150\" aria-label=\"Previous\">
-\t\t\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
-\t\t\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z\" clip-rule=\"evenodd\"/>
-\t\t\t\t\t\t\t\t\t\t</svg>
-\t\t\t\t\t\t\t\t\t</button>
-\t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t</template>
+\t\t\t\t\t\t\t<button @click=\"changePage(currentPage - 1)\" :disabled=\"currentPage === 1\" class=\"relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttransition ease-in-out duration-150\" aria-label=\"Previous\">
+\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
+\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z\" clip-rule=\"evenodd\"/>
+\t\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t</button>
 
 \t\t\t\t\t\t\t<!-- Páginas -->
 \t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t<template x-for=\"page in totalPages\" :key=\"page\">
+\t\t\t\t\t\t\t\t<template x-for=\"page in visiblePages\" :key=\"page\">
 \t\t\t\t\t\t\t\t\t<button @click=\"changePage(page)\" :class=\"{'bg-blue-500 text-white': page === currentPage, 'bg-white text-blue-700': page !== currentPage}\" class=\"-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium hover:bg-gray-100 transition ease-in-out duration-150\">
 \t\t\t\t\t\t\t\t\t\t<span x-text=\"page\"></span>
 \t\t\t\t\t\t\t\t\t</button>
@@ -522,15 +516,13 @@ class __TwigTemplate_5776df35e7de7c841f8c8a38a1b010c7 extends Template
 \t\t\t\t\t\t\t</div>
 
 \t\t\t\t\t\t\t<!-- Botón de siguiente página -->
-\t\t\t\t\t\t\t<template x-if=\"currentPage < totalPages\">
-\t\t\t\t\t\t\t\t<div>
-\t\t\t\t\t\t\t\t\t<button @click=\"changePage(currentPage + 1)\" class=\"-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150\" aria-label=\"Next\">
-\t\t\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
-\t\t\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z\" clip-rule=\"evenodd\"/>
-\t\t\t\t\t\t\t\t\t\t</svg>
-\t\t\t\t\t\t\t\t\t</button>
-\t\t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t\t</template>
+\t\t\t\t\t\t\t<button @click=\"changePage(currentPage + 1)\" :disabled=\"currentPage === totalPages\" class=\"-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\thover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500
+\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\ttransition ease-in-out duration-150\" aria-label=\"Next\">
+\t\t\t\t\t\t\t\t<svg class=\"h-5 w-5\" viewbox=\"0 0 20 20\" fill=\"currentColor\">
+\t\t\t\t\t\t\t\t\t<path fill-rule=\"evenodd\" d=\"M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z\" clip-rule=\"evenodd\"/>
+\t\t\t\t\t\t\t\t</svg>
+\t\t\t\t\t\t\t</button>
 \t\t\t\t\t\t</nav>
 \t\t\t\t\t</div>
 \t\t\t\t</div>

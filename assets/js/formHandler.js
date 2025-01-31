@@ -3,6 +3,7 @@ document.addEventListener('alpine:init', () => {
     groups: JSON.parse(
       document.querySelector('[data-groups]').getAttribute('data-groups')
     ),
+    modalState: false,
     selectedGroup: '',
     services: [],
     getIdUrl: '',
@@ -28,6 +29,11 @@ document.addEventListener('alpine:init', () => {
     handleExample(event) {
       this.itemId = event.detail.id ? event.detail?.id : null;
     },
+    handleModalClose() {
+      this.modalState = false;
+      this.itemId = null;
+      this.cleanState();
+    },
     init() {
       const updateUrl = this.$el.getAttribute('data-update');
       const getIdUrl = this.$el.getAttribute('data-getid');
@@ -43,21 +49,34 @@ document.addEventListener('alpine:init', () => {
         fetch(`${this.getIdUrl}/${this.itemId}`)
           .then((response) => response.json())
           .then((data) => {
-            this.initialState = {
-              ...this.initialState,
-              cups: data.cups,
-              diag: data.diag,
-              causa: data.causa_externa,
-              finalidad: data.finalidad,
-              tipoCita: data.tipo_cita,
-              tipoDiag: data.tipo_diag,
-              grupo: data.grupo,
-            };
-            this.selectedGroup = data.grupo;
-            this.updateServices();
-            this.initialState.servicio = data.servicio;
-            this.show = data.informe;
-            this.errors = {};
+            try {
+              if (data?.success) {
+                this.initialState = {
+                  ...this.initialState,
+                  cups: data.cups,
+                  diag: data.diag,
+                  causa: data.causa_externa,
+                  finalidad: data.finalidad,
+                  tipoCita: data.tipo_cita,
+                  tipoDiag: data.tipo_diag,
+                  grupo: data.grupo,
+                };
+                this.selectedGroup = data.grupo;
+                this.updateServices();
+                this.initialState.servicio = data.servicio;
+                this.show = data.informe;
+                this.errors = {};
+                this.modalState = true;
+                if (this.modalState) {
+                  this.$dispatch('modal-open', { update: true });
+                }
+              } else {
+                throw new Error(data?.errors.message);
+              }
+            } catch (error) {
+              this.$dispatch('alert', { error: error.message });
+              this.itemId = null;
+            }
           })
           .catch((error) =>
             console.error('Error al cargar opciones iniciales:', error)
@@ -105,13 +124,13 @@ document.addEventListener('alpine:init', () => {
           this.errors = {}; // Limpia los errores si no hay ninguno
           this.cleanState();
           this.$dispatch('modal-close');
-          this.$dispatch('alert', {'success': 'Creado correctamente'});
+          this.$dispatch('alert', { success: 'Creado correctamente' });
           this.$dispatch('reload');
         }
       } catch (error) {
         console.error('Error al enviar el formulario:', error);
         // alert('Error al enviar el formulario.');
-        this.$dispatch('alert', {'error': 'Error al enviar el formulario.'});
+        this.$dispatch('alert', { error: 'Error al enviar el formulario.' });
       }
     },
     async updateData() {
@@ -144,12 +163,15 @@ document.addEventListener('alpine:init', () => {
           // alert('Datos actualizados con éxito.');
           // this.cleanState();
           this.$dispatch('modal-close');
-          this.$dispatch('alert', {'success': 'Actualizado correctamente'});
+          this.$dispatch('alert', { success: 'Actualizado correctamente' });
           this.$dispatch('reload');
         }
       } catch (error) {
         console.error('Error al actualizar los datos:', error);
-        this.$dispatch('alert', {'error': 'Error al actualizar los datos. Por favor, inténtelo de nuevo.'});
+        this.$dispatch('alert', {
+          error:
+            'Error al actualizar los datos. Por favor, inténtelo de nuevo.',
+        });
         // alert('Error al actualizar los datos. Por favor, inténtelo de nuevo.');
       }
     },

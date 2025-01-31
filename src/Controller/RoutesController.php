@@ -40,6 +40,7 @@ class RoutesController extends AbstractController
         $totalCount = count($paginator);
         $totalPages = (int) ceil($totalCount / $itemsPerPage);
 
+        // dd(iterator_to_array($paginator));
         $formattedData = [];
         foreach ($paginator as $item) {
 
@@ -55,17 +56,17 @@ class RoutesController extends AbstractController
 
             $formattedData[] = [
                 'id' => $item->getId(),
-                'code_cups' => $item->getCups()->getCodigoCups(),
-                'description_cups' => $item->getCups()->getDescripcionCups(),
+                'code_cups' => $item->getCups()?->getCodigoCups() ?? "",
+                'description_cups' => $item->getCups()?->getDescripcionCups() ?? "",
                 'tipo_cita' => $item->getTipoCita() == "1" ? "Consulta" : "Procedimiento",
                 'informe_oportunidad' => $item->isInformeOportunidad(),
-                'diagnostico_defaults' => $item->getDiagnosticoDefaults()->getCie10() . ': ' . $item->getDiagnosticoDefaults()->getNombre(),
-                'finalidad' => $item->getFinalidad()->getCodigo() . ': ' . $item->getFinalidad()->getNombre(),
-                'causa_externa' => $item->getCausaExterna()->getCodigo() . ': ' . $item->getCausaExterna()->getNombre(),
-                'servicio_rips_code' => $item->getServicioRipsCode()->getCodigo() . ': ' . $item->getServicioRipsCode()->getNombre(),
+                'diagnostico_defaults' => $item->getDiagnosticoDefaults()?->getCie10() . ': ' . $item->getDiagnosticoDefaults()?->getNombre() ?? "",
+                'finalidad' => $item->getFinalidad()?->getCodigo() . ': ' . $item->getFinalidad()?->getNombre() ?? "",
+                'causa_externa' => $item->getCausaExterna()?->getCodigo() . ': ' . $item->getCausaExterna()?->getNombre() ?? "",
+                'servicio_rips_code' => $item->getServicioRipsCode()?->getCodigo() . ': ' . ($item->getServicioRipsCode()?->getNombre() ?? "") ?? "",
                 'tipo_diagnostico' => $type_diag,
                 'created_by' => $item->getCreatedBy(),
-                'created_at' => $item->getCreatedAt()->format('d/m/Y')
+                'created_at' => $item->getCreatedAt()?->format('d/m/Y') ?? ""
             ];
         }
 
@@ -87,8 +88,10 @@ class RoutesController extends AbstractController
         $result_consult = $consult->find($id);
 
         if (!$result_consult) {
-            // Si no se encuentra, redirigir o mostrar un mensaje de error
-            throw $this->createNotFoundException('Registro no encontrado.');
+            return $this->json([
+                'errors' => ['message' => 'No se encontraron resultados con el id ' . $id],
+                JsonResponse::HTTP_NOT_FOUND
+            ]);
         }
 
         // Retornar los datos de la consulta en formato JSON para el modal
@@ -133,7 +136,8 @@ class RoutesController extends AbstractController
 
         // Asignar los campos no relacionados (campos simples)
         $data['informe_oportunidad'] = $data['informe_oportunidad'] == 'true' ? true : false;
-        $data['created_by'] = "Admin";
+        $data['created_by'] = 1;
+        $data['tipo_servicio'] = "1";
 
         $simpleFields = [
             'tipo_servicio' => 'setTipoServicio',
@@ -189,6 +193,8 @@ class RoutesController extends AbstractController
 
         // Campos simples para asignar directamente
         $data['informe_oportunidad'] = isset($data['informe_oportunidad']) && $data['informe_oportunidad'] == 'true';
+
+        $data['tipo_servicio'] = "1";
         $simpleFields = [
             'tipo_servicio' => 'setTipoServicio',
             'informe_oportunidad' => 'setInformeOportunidad',
@@ -197,7 +203,7 @@ class RoutesController extends AbstractController
         ];
 
         // Validar y asignar los campos
-        $result = $validationService->validateAndAssignRelations($asConsultas, $data, $relations, $simpleFields);
+        $result = $validationService->validateAndAssignRelations($asConsultas, $data, $relations, $simpleFields, $id);
 
         if (isset($result['errors'])) {
             return $this->json($result);

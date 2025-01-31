@@ -2,23 +2,37 @@
 
 namespace App\Service;
 
+use App\Repository\AsConsultasProcedimientosRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ValidationServices
 {
     private ValidatorInterface $validator;
+    private AsConsultasProcedimientosRepository $consultas;
 
-    public function __construct(ValidatorInterface $validator)
+    public function __construct(ValidatorInterface $validator, AsConsultasProcedimientosRepository $consultas)
     {
         $this->validator = $validator;
+        $this->consultas = $consultas;
     }
 
     public function validateAndAssignRelations(
         object $entity,
         array $data,
         array $relations,
-        array $simpleFields
+        array $simpleFields,
+        ?int $currentId = null
     ) {
+
+        if (isset($data['cups'])) {
+            $existingRecord = $this->consultas->findOneBy(['cups' => $data['cups']]);
+    
+            // Verificamos si existe un registro diferente al actual con el mismo CUPS
+            if ($existingRecord && $existingRecord->getId() !== $currentId) {
+                return ['errors' => ['cups' => 'El CUPS ya está registrado en otro registro.']];
+            }
+        }
+
         // Iteramos sobre las relaciones
         foreach ($relations as $field => [$repository, $method]) {
             if (isset($data[$field]) && !empty($data[$field])) {
@@ -39,6 +53,7 @@ class ValidationServices
 
         // Validamos la entidad
         $errors = $this->validator->validate($entity);
+
         if (count($errors) > 0) {
             $errorMessages = [];
             foreach ($errors as $error) {

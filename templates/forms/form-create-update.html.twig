@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<form method="post" action="{{ path('create_as_consult') }}" x-data="formHandler()" @submit.prevent="!itemId ? submitForm : updateData" data-update="{{ path('update_as_consult', {'id': 'id'}) }}" data-getid="{{ path('get_as_consult_by_id', {'id': 'id'}) }}">
+	<form method="post" action="{{ path('create_as_consult') }}" x-data="formHandler()" @submit.prevent="!itemId ? submitForm : updateData" data-update="{{ path('update_as_consult', {'id': 'id'}) }}" data-getid="{{ path('get_as_consult_by_id', {'id': 'id'}) }}" @modal-close.window="handleModalClose();">
 		<div class="mt-5 grid grid-cols-2 gap-4" @form-update.window="handleExample($event)" data-groups="{{ groupedData|json_encode|e('html_attr') }}">
 			<div class="col-span-2">
 				<label for="cups" class="block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2">Cups</label>

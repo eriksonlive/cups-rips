@@ -123,7 +123,7 @@ class ListCupsRipsController extends AbstractController
     }
 
     #[Route('/export', name: 'export_data', methods: ['GET'])]
-    public function exportData(AsConsultasProcedimientosRepository $procedimientos): Response
+    public function exportData(AsConsultasProcedimientosRepository $procedimientos)
     {
         $data = $procedimientos->findBy([], ['id' => 'DESC']); // Reemplaza con tu lógica para obtener los datos
         $export = new ExportsServices();
@@ -167,7 +167,7 @@ class ListCupsRipsController extends AbstractController
             $define_data[$cl][] = $item->getServicioRipsCode()->getCodigo() . ': ' . $item->getServicioRipsCode()->getNombre();
             $define_data[$cl][] = $tipoServ;
             $define_data[$cl][] = $item->getCreatedBy();
-            $define_data[$cl][] = $item->getCreatedAt()->format('d/m/Y');
+            $define_data[$cl][] = $item->getCreatedAt()?->format('d/m/Y') ?? "";
         }
 
         $tempFile = $export->exportDocumentExcel($define_cells, $define_data);

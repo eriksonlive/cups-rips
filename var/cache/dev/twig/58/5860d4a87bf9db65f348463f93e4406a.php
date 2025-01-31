@@ -105,7 +105,7 @@ class __TwigTemplate_3c9c55a4a5c4c4e892af3f8fddc14e93 extends Template
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("update_as_consult", ["id" => "id"]);
         yield "\" data-getid=\"";
         yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("get_as_consult_by_id", ["id" => "id"]);
-        yield "\">
+        yield "\" @modal-close.window=\"handleModalClose();\">
 \t\t<div class=\"mt-5 grid grid-cols-2 gap-4\" @form-update.window=\"handleExample(\$event)\" data-groups=\"";
         // line 9
         yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(json_encode((isset($context["groupedData"]) || array_key_exists("groupedData", $context) ? $context["groupedData"] : (function () { throw new RuntimeError('Variable "groupedData" does not exist.', 9, $this->source); })())), "html_attr");
@@ -280,7 +280,7 @@ class __TwigTemplate_3c9c55a4a5c4c4e892af3f8fddc14e93 extends Template
 {% endblock %}
 
 {% block body %}
-\t<form method=\"post\" action=\"{{ path('create_as_consult') }}\" x-data=\"formHandler()\" @submit.prevent=\"!itemId ? submitForm : updateData\" data-update=\"{{ path('update_as_consult', {'id': 'id'}) }}\" data-getid=\"{{ path('get_as_consult_by_id', {'id': 'id'}) }}\">
+\t<form method=\"post\" action=\"{{ path('create_as_consult') }}\" x-data=\"formHandler()\" @submit.prevent=\"!itemId ? submitForm : updateData\" data-update=\"{{ path('update_as_consult', {'id': 'id'}) }}\" data-getid=\"{{ path('get_as_consult_by_id', {'id': 'id'}) }}\" @modal-close.window=\"handleModalClose();\">
 \t\t<div class=\"mt-5 grid grid-cols-2 gap-4\" @form-update.window=\"handleExample(\$event)\" data-groups=\"{{ groupedData|json_encode|e('html_attr') }}\">
 \t\t\t<div class=\"col-span-2\">
 \t\t\t\t<label for=\"cups\" class=\"block text-sm text-gray-700 capitalize dark:text-gray-200 mb-2\">Cups</label>

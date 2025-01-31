@@ -30,7 +30,9 @@ class AsConsultasProcedimientosRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('a')
             ->leftJoin('a.cups', 'cu') // Realiza un join con la relación
-            ->addSelect('cu');
+            ->leftJoin('a.servicio_rips_code', 'se') // Realiza un join con la relación
+            ->addSelect('cu')
+            ->addSelect('se');
 
         // Aplicar filtros si los valores están presentes
         if ($codigoCups) {
@@ -44,6 +46,8 @@ class AsConsultasProcedimientosRepository extends ServiceEntityRepository
         }
 
         $query = $qb->orderBy('a.id', 'DESC')
+            // ->andWhere('se.nombre IS NOT NULL AND se.nombre != \'\'')
+            // ->andWhere('cu.codigo_cups IS NOT NULL')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery();

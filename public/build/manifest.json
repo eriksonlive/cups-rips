@@ -1,6 +1,7 @@
 {
-  "build/app.css": "/build/app.12ec12eb.css",
-  "build/app.js": "/build/app.8574dfe2.js",
-  "build/runtime.js": "/build/runtime.620a04ca.js",
-  "build/85.d1cf502d.js": "/build/85.d1cf502d.js"
+  "build/app.css": "http://localhost:8080/build/app.css",
+  "build/app.js": "http://localhost:8080/build/app.js",
+  "build/runtime.js": "http://localhost:8080/build/runtime.js",
+  "build/vendors-node_modules_alpinejs_dist_module_esm_js-node_modules_mini-css-extract-plugin_dist_hm-ae8a57.js": "http://localhost:8080/build/vendors-node_modules_alpinejs_dist_module_esm_js-node_modules_mini-css-extract-plugin_dist_hm-ae8a57.js",
+  "build/vendors-node_modules_alpinejs_dist_module_esm_js-node_modules_mini-css-extract-plugin_dist_hm-6733b1.js": "http://localhost:8080/build/vendors-node_modules_alpinejs_dist_module_esm_js-node_modules_mini-css-extract-plugin_dist_hm-6733b1.js"
 }
